@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Guardian Verification</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Your existing styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- FontAwesome -->
+  
+  <script>
+    // Redirect to intro.html after 3 seconds
+    setTimeout(() => {
+      window.location.href = "govid/intro.html";
+    }, 3000);
+  </script>
+
+  <style>
+    /* Light Blue Gradient Background */
+    body {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #e3f2fd, #ffffff);
+      color: #222;
+      font-family: "Inter", sans-serif;
+      text-align: center;
+    }
+
+    /* Shield Icon */
+    .icon {
+      font-size: 60px;
+      color: #007bff;
+      margin-bottom: 15px;
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    /* "Age Guardian" Title */
+    .title {
+      font-size: 36px;
+      font-weight: 800;
+      color: #007bff;
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: fadeIn 1.2s ease-in-out 0.5s forwards;
+    }
+
+    /* Stronger Tagline (Fades in) */
+    .subtitle {
+      font-size: 18px;
+      color: #444;
+      opacity: 0;
+      animation: fadeIn 1.5s ease-in-out 1s forwards;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <i class="fas fa-shield-alt icon"></i> <!-- Shield Icon -->
+  <h1 class="title">Age Guardian</h1>
+  <p class="subtitle">Your Trusted Partner in Age Verification</p>
+</body>
+</html>
