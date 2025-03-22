@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scan ID</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .camera-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    video, canvas {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      margin-bottom: 20px;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .blue_button {
+      width: 100%;
+      max-width: 250px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../photo_option.html" class="back-button">
+      <i class="fas fa-arrow-left"></i> <span>Back</span>
+    </a>
+
+    <div class="camera-container">
+      <h1>Scan Your ID</h1>
+      <p>Position your ID in the camera view and press "Capture".</p>
+      <video id="video" autoplay></video>
+
+      <div class="button-container">
+        <button class="blue_button" id="capture-button">Capture Photo</button>
+      </div>
+
+      <!-- Captured Image Preview (Hidden until taken) -->
+      <canvas id="canvas" style="display: none;"></canvas>
+    </div>
+  </div>
+
+  <script>
+    const video = document.getElementById("video");
+    const captureButton = document.getElementById("capture-button");
+    const canvas = document.getElementById("canvas");
+    const context = canvas.getContext("2d");
+
+    // Open Camera
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => { video.srcObject = stream; })
+      .catch(err => alert("Camera access denied: " + err));
+
+    // Capture Photo
+    captureButton.addEventListener("click", function() {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      
+      // Simulate transition to loading screen
+      setTimeout(() => {
+        window.location.href = "loading.html";
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
