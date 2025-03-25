@@ -1,1 +1,1 @@
-Hosted at https://age-guardian.web.app/. Condition view for participants via https://age-guardian.web.app/?condition={1-8}&participantId={prolific_id}. 
+Hosted at https://age-guardian.web.app/. Can condition view based on url. Example: https://age-guardian.web.app/?condition=2&participantId=test_participant
