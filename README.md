@@ -1,1 +1,4 @@
-Hosted at https://age-guardian.web.app/. Can condition view based on url. Example: https://age-guardian.web.app/?condition=2&participantId=test_participant
+- This is just a code repository. The website is currently hosted on Firebase at https://age-guardian.web.app/.
+- You can condition view based on url. Example: https://age-guardian.web.app/?condition=2&participantId=test_participant.
+- If you aren't seeing changes reflected on firebase, try running in incognito mode or clearing your cache.
+- To push changes to the server, run <firebase deploy --only hosting> (Assuming that you have already installed firebase tools). 
