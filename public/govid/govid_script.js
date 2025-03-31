@@ -40,37 +40,6 @@ console.log("Participant ID:", participantId);
 console.log("Condition:", condition);
 console.log("Page:", page);
 
-// Append button press to choices array in participants/{participantId}
-// function handleFormSubmit(event, destination, choice) {
-//   event.preventDefault();
-
-//   if (participantId && condition) {
-//     const participantRef = db.collection('participants').doc(participantId);
-//     // console.log("Writing to document:", participantRef.path); // Should be: participants/test1
-
-//     console.log("Attempting to update document:", participantRef.path); // Verify path
-//     console.log("Data to add:", { page, choice }); // Verify data
-
-//     participantRef.update({
-//       choices: firebase.firestore.FieldValue.arrayUnion({
-//         page: page,
-//         choice: choice,
-//         timestamp: firebase.firestore.FieldValue.serverTimestamp()
-//       })
-//     })
-//     .then(() => {
-//       console.log("✅ Choice logged to Firestore");
-//       window.location.href = `${destination}?participantId=${participantId}&condition=${condition}`;
-//     })
-//     .catch((error) => {
-//       console.error("❌ Error logging choice:", error);
-//       window.location.href = `${destination}?participantId=${participantId}&condition=${condition}`;
-//     });
-//   } else {
-//     console.error("❌ Missing participantId or condition");
-//   }
-// }
-
 // Inside handleFormSubmit in govid_script.js
 function handleFormSubmit(event, destination, choice) {
   event.preventDefault();
