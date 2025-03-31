@@ -43,6 +43,15 @@ p {
   gap: 12px;
 }
 
+.button-container form {
+  width: 100%;
+  max-width: 260px;
+}
+
+.button-container button {
+  width: 100%;
+}
+
 .blue_button, .alternative_button {
   width: 100%;
   max-width: 260px;
