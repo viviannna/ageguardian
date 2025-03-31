@@ -89,7 +89,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const uploadButtonPhoto = document.getElementById('upload-button');
   const uploadInputPhoto = document.getElementById('upload-input');
 
-  if (scanButtonPhoto && uploadButtonPhoto && uploadInputPhoto) {
+  const backButton = document.getElementById('back-button');
+
+  if (scanButtonPhoto && uploadButtonPhoto && uploadInputPhoto && backButton) {
+
     scanButtonPhoto.addEventListener('click', (event) => {
       handleFormSubmit(event, 'camera/camera.html', 'scan_id');
     });
@@ -101,6 +104,33 @@ document.addEventListener('DOMContentLoaded', function () {
     uploadInputPhoto.addEventListener('change', function (event) {
       if (this.files.length > 0) {
         handleFormSubmit(event, 'upload/loading.html', 'upload_id');
+      }
+    });
+
+    backButton.addEventListener('click', (event) => {
+      // Log the back button press to Firestore
+      if (participantId && condition) {
+        const participantRef = db.collection('participants').doc(participantId);
+        const choiceData = {
+          page: page,
+          choice: 'back',
+          timestamp: firebase.firestore.Timestamp.now()
+        };
+
+        participantRef.update({
+          choices: firebase.firestore.FieldValue.arrayUnion(choiceData)
+        })
+          .then(() => {
+            console.log("✅ Back button press logged to Firestore");
+            window.history.back(); // Navigate to the previous page
+          })
+          .catch((error) => {
+            console.error("❌ Error logging back button press:", error);
+            window.history.back(); // Navigate to the previous page even if logging fails
+          });
+      } else {
+        console.error("❌ Missing participantId or condition");
+        window.history.back(); // Navigate to the previous page even if logging fails
       }
     });
   }
