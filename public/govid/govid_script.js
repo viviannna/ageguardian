@@ -1,6 +1,6 @@
 // govid_script.js
 
-// Firebase config
+// Firebase config (assuming it's already defined as in your original script)
 const firebaseConfig = {
   apiKey: "AIzaSyC0cNURFjmI46_8HhRUJBrVzIYD7qk5NtM",
   authDomain: "age-guardian.firebaseapp.com",
@@ -15,14 +15,13 @@ const firebaseConfig = {
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
   console.log("Firebase was initialized inside govid.");
-}
-else {
+} else {
   console.log("Firebase already initialized.");
 }
 
 const db = firebase.firestore();
 
-// Parse URL parameters
+// Parse URL parameters (assuming it's already defined as in your original script)
 function getUrlParameter(name) {
   name = name.replace(/[\[\]]/g, '\\$&');
   const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
@@ -40,52 +39,74 @@ console.log("Participant ID:", participantId);
 console.log("Condition:", condition);
 console.log("Page:", page);
 
-// Inside handleFormSubmit in govid_script.js
+// Modified handleFormSubmit function to include the choice parameter
 function handleFormSubmit(event, destination, choice) {
   event.preventDefault();
-  console.log("handleFormSubmit called. Participant ID:", participantId, "Condition:", condition);
+  console.log("handleFormSubmit called. Participant ID:", participantId, "Condition:", condition, "Choice:", choice);
   if (participantId && condition) {
-      const participantRef = db.collection('participants').doc(participantId);
-      console.log("Attempting to update document:", participantRef.path);
-      const choiceData = {
-          page: page,
-          choice: choice,
-          // timestamp: new Date() // Use JS Date object (Firestore converts it)
-          // OR more explicitly:
-          timestamp: firebase.firestore.Timestamp.now() // Use Firestore client-side timestamp
-      };
-      console.log("Data to add:", choiceData);
+    const participantRef = db.collection('participants').doc(participantId);
+    console.log("Attempting to update document:", participantRef.path);
+    const choiceData = {
+      page: page,
+      choice: choice,
+      timestamp: firebase.firestore.Timestamp.now()
+    };
+    console.log("Data to add:", choiceData);
 
-      participantRef.update({
-          choices: firebase.firestore.FieldValue.arrayUnion(choiceData) // Add the object with client timestamp
-      })
+    participantRef.update({
+      choices: firebase.firestore.FieldValue.arrayUnion(choiceData)
+    })
       .then(() => {
-          console.log("✅ Choice logged to Firestore");
-          window.location.href = `${destination}?participantId=${participantId}&condition=${condition}`;
+        console.log("✅ Choice logged to Firestore");
+        window.location.href = `${destination}?participantId=${participantId}&condition=${condition}`;
       })
       .catch((error) => {
-          // Now you should see this error logged if something else goes wrong
-          console.error("❌ Error logging choice:", error);
-          window.location.href = `${destination}?participantId=${participantId}&condition=${condition}`;
+        console.error("❌ Error logging choice:", error);
+        window.location.href = `${destination}?participantId=${participantId}&condition=${condition}`;
       });
   } else {
-      console.error("❌ Missing participantId or condition");
+    console.error("❌ Missing participantId or condition");
   }
 }
 
-// ✅ Attach button listeners
+// Attach button listeners (modified to handle both intro.html and photo_option.html)
 document.addEventListener('DOMContentLoaded', function () {
-  const photoButton = document.querySelector('#photoForm button[type="button"]');
-  const alternativeButton = document.querySelector('#alternativeForm button[type="button"]');
+  // For intro.html
+  const photoButtonIntro = document.querySelector('#photoForm button[type="button"]');
+  const alternativeButtonIntro = document.querySelector('#alternativeForm button[type="button"]');
 
-  if (photoButton && alternativeButton) {
-    photoButton.addEventListener('click', (event) =>
+  if (photoButtonIntro && alternativeButtonIntro) {
+    photoButtonIntro.addEventListener('click', (event) =>
       handleFormSubmit(event, 'photo_option.html', 'upload_id')
     );
-    alternativeButton.addEventListener('click', (event) =>
+    alternativeButtonIntro.addEventListener('click', (event) =>
       handleFormSubmit(event, 'alternative.html', 'verify_another')
     );
-  } else {
-    console.error("❌ One or both buttons not found.");
+  }
+
+  // For photo_option.html
+  const scanButtonPhoto = document.getElementById('scan-button');
+  const uploadButtonPhoto = document.getElementById('upload-button');
+  const uploadInputPhoto = document.getElementById('upload-input');
+
+  if (scanButtonPhoto && uploadButtonPhoto && uploadInputPhoto) {
+    scanButtonPhoto.addEventListener('click', (event) => {
+      handleFormSubmit(event, 'camera/camera.html', 'scan_id');
+    });
+
+    uploadButtonPhoto.addEventListener('click', function (event) {
+      uploadInputPhoto.click(); // Trigger file picker
+    });
+
+    uploadInputPhoto.addEventListener('change', function (event) {
+      if (this.files.length > 0) {
+        handleFormSubmit(event, 'upload/loading.html', 'upload_id');
+      }
+    });
+  }
+
+  // Check if any buttons were found
+  if (!photoButtonIntro && !alternativeButtonIntro && !scanButtonPhoto && !uploadButtonPhoto && !uploadInputPhoto) {
+    console.error("❌ No relevant buttons found on this page.");
   }
 });
