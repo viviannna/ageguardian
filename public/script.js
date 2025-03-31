@@ -34,18 +34,39 @@ const participantId = getUrlParameter('participantId');
 console.log('Condition:', condition);
 console.log('Participant ID:', participantId);
 
-// Create participant document with an empty choices array
+// Create or update participant document without wiping choices
 if (participantId && condition) {
-  db.collection('participants').doc(participantId).set({
-    condition: condition,
-    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    choices: []  // Correctly initialize as an array
-  }, { merge: true })  // Prevent overwriting if document exists
-  .then(() => {
-    console.log("✅ Participant document created or updated.");
+  db.collection('participants').doc(participantId).get()
+  .then((doc) => {
+    if (doc.exists) {
+      // Document exists, update condition and timestamp, keep existing choices
+      db.collection('participants').doc(participantId).update({
+        condition: condition,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      })
+      .then(() => {
+        console.log("✅ Participant document updated (condition and timestamp).");
+      })
+      .catch((error) => {
+        console.error("❌ Error updating participant document: ", error);
+      });
+    } else {
+      // Document does not exist, create it with condition, timestamp, and empty choices
+      db.collection('participants').doc(participantId).set({
+        condition: condition,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        choices: []
+      })
+      .then(() => {
+        console.log("✅ Participant document created.");
+      })
+      .catch((error) => {
+        console.error("❌ Error creating participant document: ", error);
+      });
+    }
   })
   .catch((error) => {
-    console.error("❌ Error creating participant document: ", error);
+    console.error("❌ Error getting participant document: ", error);
   });
 }
 
