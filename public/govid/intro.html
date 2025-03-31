@@ -7,6 +7,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
   <style>
     .button-container form {
       width: 100%;
@@ -26,16 +29,36 @@
       <h1>Upload a Government-Issued ID</h1>
       <p>To comply with age regulations, please upload a government-issued ID for verification. Accepted documents: driver’s license, passport, or national ID card.</p>
 
-      <div class="button-container">
-        <form action="photo_option.html">
+      <!-- <div class="button-container">
+        <form id="photoForm" action="photo_option.html">
           <button class="blue_button" type="submit">Upload ID Document</button>
         </form>
-        <form action="alternative.html">
+        <form id="alternativeForm" action="alternative.html">
           <button class="alternative_button" type="submit">Verify Another Way</button>
         </form>
-      </div>
+      </div> -->
 
+      <!-- <div class = "button-container">
+        <form id="photoForm">
+          <button class="blue_button" type="button">Upload ID Document</button>
+        </form>
+        <form id="alternativeForm">
+          <button class="alternative_button" type="button">Verify Another Way</button>
+        </form>
+      </div>
+       -->
+
+       <div class="button-container">
+        <form id="photoForm">
+          <button class="blue_button" type="button">Upload ID Document</button>
+        </form>
+        <form id="alternativeForm">
+          <button class="alternative_button" type="button">Verify Another Way</button>
+        </form>
+      </div>
+      
     </div>  
   </div>
+  <script src="govid_script.js"></script>
 </body>
 </html>

@@ -7,6 +7,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
   <style>
     input[type="file"] { display: none; }
 
@@ -14,7 +17,7 @@
       font-size: 0.8rem;
       color: #888;
       margin-top: 20px;
-      margin-bottom: 24px; /* ensures spacing before buttons */
+      margin-bottom: 24px;
       line-height: 1.4;
       display: flex;
       align-items: flex-start;
@@ -29,7 +32,6 @@
       margin-top: 2px;
       color: #888;
     }
-
   </style>
 </head>
 <body>
@@ -49,24 +51,32 @@
       </div>
 
       <div class="button-container">
-        <button class="blue_button" id="scan-button">
+        <button class="blue_button" id="scan-button" type="button">
           <i class="fas fa-camera" style="margin-right: 8px;"></i> Scan ID Now
         </button>
-        <button class="alternative_button" id="upload-button">
+        <button class="alternative_button" id="upload-button" type="button">
           <i class="fas fa-file-upload" style="margin-right: 8px;"></i> Upload a Photo
         </button>
-        <input type="file" id="upload-input" accept="image/*" style="display: none;">
+        <input type="file" id="upload-input" accept="image/*">
+      </div>
     </div>  
   </div>
 
   <script>
-    document.getElementById("upload-input").addEventListener("change", function() {
+    // Trigger file picker
+    document.getElementById("upload-button").addEventListener("click", function () {
+      document.getElementById("upload-input").click();
+    });
+
+    // Redirect after file selection
+    document.getElementById("upload-input").addEventListener("change", function () {
       if (this.files.length > 0) {
         window.location.href = "upload/loading.html";
       }
     });
 
-    document.getElementById("scan-button").addEventListener("click", function() {
+    // Scan button
+    document.getElementById("scan-button").addEventListener("click", function () {
       window.location.href = "camera/camera.html";
     });
   </script>

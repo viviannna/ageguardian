@@ -4,18 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Age Guardian Verification</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Your existing styles -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- FontAwesome -->
-  
-  <script>
-    // Redirect to intro.html after 3 seconds
-    setTimeout(() => {
-      window.location.href = "govid/intro.html";
-    }, 3000);
-  </script>
+  <link rel="stylesheet" href="govid/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 
   <style>
-    /* Light Blue Gradient Background */
     body {
       height: 100vh;
       display: flex;
@@ -28,7 +23,6 @@
       text-align: center;
     }
 
-    /* Shield Icon */
     .icon {
       font-size: 60px;
       color: #007bff;
@@ -37,7 +31,6 @@
       animation: fadeIn 1s ease-in-out forwards;
     }
 
-    /* "Age Guardian" Title */
     .title {
       font-size: 36px;
       font-weight: 800;
@@ -47,7 +40,6 @@
       animation: fadeIn 1.2s ease-in-out 0.5s forwards;
     }
 
-    /* Stronger Tagline (Fades in) */
     .subtitle {
       font-size: 18px;
       color: #444;
@@ -55,7 +47,6 @@
       animation: fadeIn 1.5s ease-in-out 1s forwards;
     }
 
-    /* Fade-in animation */
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -63,8 +54,15 @@
   </style>
 </head>
 <body>
-  <i class="fas fa-shield-alt icon"></i> <!-- Shield Icon -->
-  <h1 class="title">Age Guardian</h1>
-  <p class="subtitle">Your Trusted Partner in Age Verification</p>
+  <div id="content">
+    <i class="fas fa-shield-alt icon"></i>
+    <h1 class="title">Age Guardian</h1>
+    <p class="subtitle">Your Trusted Partner in Age Verification</p>
+  </div>
+
+  <div id = "main-content">
+  </div>
+
+  <script type="module" src="script.js"></script>
 </body>
 </html>
