@@ -84,6 +84,14 @@ document.addEventListener('DOMContentLoaded', function () {
     );
   }
 
+  // For alternative.html
+  const alternativeSubmit = document.getElementById('alternative-submit');
+  if (alternativeSubmit) {
+    alternativeSubmit.addEventListener('click', (event) => {
+      handleFormSubmit(event, 'alternative_debrief.html', 'alternative_submit');
+    });
+  }
+
   // For photo_option.html
   const scanButtonPhoto = document.getElementById('scan-button');
   const uploadButtonPhoto = document.getElementById('upload-button');
@@ -136,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Check if any buttons were found
-  if (!photoButtonIntro && !alternativeButtonIntro && !scanButtonPhoto && !uploadButtonPhoto && !uploadInputPhoto) {
+  if (!photoButtonIntro && !alternativeButtonIntro && !scanButtonPhoto && !uploadButtonPhoto && !uploadInputPhoto && !backButton && !alternativeSubmit) {
     console.error("❌ No relevant buttons found on this page.");
   }
 });

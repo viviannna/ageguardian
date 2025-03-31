@@ -142,10 +142,16 @@ p {
 
 .custom-back-button i {
   font-size: 14px;
+  /* remove underline */
+  text-decoration: none !important;
 }
 
 .custom-back-button:hover {
-  text-decoration: underline; /* Underline on hover */
+  text-decoration: none; /* Underline on hover */
+}
+
+.custom-back-button:hover span {
+  text-decoration: underline; /* underline only the "Back" text */
 }
 
 .privacy-text {
@@ -194,4 +200,15 @@ p {
 .assurance-text i {
   margin-top: 2px;
   color: #888;
+}
+
+.input-field {
+  padding: 14px 16px;
+  width: 100%;
+  max-width: 260px;
+  box-sizing: border-box;
+  margin-bottom: 0; /* removed the bottom margin to reduce gap */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
 }
