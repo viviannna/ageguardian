@@ -69,6 +69,33 @@ function handleFormSubmit(event, destination, choice) {
   }
 }
 
+// Generic back to page function
+function handleBackToPage(event, destination) {
+  if (participantId && condition) {
+    const participantRef = db.collection('participants').doc(participantId);
+    const choiceData = {
+      page: page,
+      choice: 'back',
+      timestamp: firebase.firestore.Timestamp.now()
+    };
+
+    participantRef.update({
+      choices: firebase.firestore.FieldValue.arrayUnion(choiceData)
+    })
+      .then(() => {
+        console.log(`✅ Back button press logged to Firestore. Redirecting to ${destination}`);
+        window.location.href = `${destination}?participantId=${participantId}&condition=${condition}`;
+      })
+      .catch((error) => {
+        console.error(`❌ Error logging back button press to Firestore. Redirecting to ${destination}:`, error);
+        window.location.href = `${destination}?participantId=${participantId}&condition=${condition}`;
+      });
+  } else {
+    console.error("❌ Missing participantId or condition");
+    window.location.href = `${destination}?participantId=${participantId}&condition=${condition}`;
+  }
+}
+
 // Attach button listeners (modified to handle both intro.html and photo_option.html)
 document.addEventListener('DOMContentLoaded', function () {
   // For intro.html
@@ -97,10 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const uploadButtonPhoto = document.getElementById('upload-button');
   const uploadInputPhoto = document.getElementById('upload-input');
 
-  const backButton = document.getElementById('back-button');
-
-  if (scanButtonPhoto && uploadButtonPhoto && uploadInputPhoto && backButton) {
-
+  if (scanButtonPhoto && uploadButtonPhoto && uploadInputPhoto) {
     scanButtonPhoto.addEventListener('click', (event) => {
       handleFormSubmit(event, 'camera/camera.html', 'scan_id');
     });
@@ -114,37 +138,27 @@ document.addEventListener('DOMContentLoaded', function () {
         handleFormSubmit(event, 'upload/loading.html', 'upload_id');
       }
     });
+  }
 
-    backButton.addEventListener('click', (event) => {
-      // Log the back button press to Firestore
-      if (participantId && condition) {
-        const participantRef = db.collection('participants').doc(participantId);
-        const choiceData = {
-          page: page,
-          choice: 'back',
-          timestamp: firebase.firestore.Timestamp.now()
-        };
+  // Generic Back to page buttons.
 
-        participantRef.update({
-          choices: firebase.firestore.FieldValue.arrayUnion(choiceData)
-        })
-          .then(() => {
-            console.log("✅ Back button press logged to Firestore");
-            window.history.back(); // Navigate to the previous page
-          })
-          .catch((error) => {
-            console.error("❌ Error logging back button press:", error);
-            window.history.back(); // Navigate to the previous page even if logging fails
-          });
-      } else {
-        console.error("❌ Missing participantId or condition");
-        window.history.back(); // Navigate to the previous page even if logging fails
-      }
+  const backToIntro = document.getElementById('back-to-intro');
+  if (backToIntro) {
+    backToIntro.addEventListener('click', (event) => {
+      handleBackToPage(event, 'intro.html');
     });
   }
 
+  // example of back to photo option page.
+  const backToPhotoOption = document.getElementById('back-to-photo-option');
+  if (backToPhotoOption) {
+      backToPhotoOption.addEventListener('click', (event) => {
+          handleBackToPage(event, '../photo_option.html');
+      });
+  }
+
   // Check if any buttons were found
-  if (!photoButtonIntro && !alternativeButtonIntro && !scanButtonPhoto && !uploadButtonPhoto && !uploadInputPhoto && !backButton && !alternativeSubmit) {
+  if (!photoButtonIntro && !alternativeButtonIntro && !scanButtonPhoto && !uploadButtonPhoto && !uploadInputPhoto && !backToIntro && !alternativeSubmit) {
     console.error("❌ No relevant buttons found on this page.");
   }
 });

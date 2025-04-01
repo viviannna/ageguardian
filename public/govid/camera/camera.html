@@ -7,6 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="../styles.css">
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
   <style>
     .camera-container {
       display: flex;
@@ -24,27 +26,14 @@
       margin-bottom: 20px;
     }
 
-    .button-container {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      margin-top: 10px;
-    }
-
-    .blue_button {
-      width: 100%;
-      max-width: 250px;
-      padding: 14px;
-      font-size: 16px;
-      font-weight: 600;
-    }
   </style>
 </head>
 <body>
   <div class="container">
-    <a href="../photo_option.html" class="back-button">
+    
+    <button class="custom-back-button" id="back-to-photo-option" type="button">
       <i class="fas fa-arrow-left"></i> <span>Back</span>
-    </a>
+    </button>
 
     <div class="camera-container">
       <h1>Scan Your ID</h1>
@@ -83,5 +72,7 @@
       }, 1000);
     });
   </script>
+
+  <script src="../govid_script.js"></script>
 </body>
 </html>
