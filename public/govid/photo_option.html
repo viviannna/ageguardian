@@ -5,42 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scan or Upload ID</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
   <style>
     input[type="file"] { display: none; }
   </style>
-
-  </head>
+</head>
 <body>
   <div class="container">
-
     <button class="custom-back-button" id="back-to-intro" type="button">
-      <i class="fas fa-arrow-left"></i> <span>Back</span>
+      <span class="material-symbols-outlined">arrow_back</span>
+      Back
     </button>
+    
 
-    <div style="text-align: center; padding: 30px; max-width: 500px; margin: 0 auto;">
-      <i class="fas fa-camera" style="font-size: 80px; color: #007bff; margin-bottom: 20px;"></i>
-      <h1>Scan or Upload Your ID</h1>
-      <p>Choose how you’d like to verify your age. You can scan your ID using your camera or upload a photo from your device.</p>
-<!-- 
-      <div class="assurance-text">
-        <i class="fas fa-lock"></i>
-        <span>Your data will be securely stored and deleted immediately after the verification process is complete. In compliance with local laws, we will not share your data with 3rd party data brokers</span>
-      </div> -->
-
-      <div class="button-container">
-        <button class="blue_button" id="scan-button" type="button">
-          <i class="fas fa-camera" style="margin-right: 8px;"></i> Scan ID Now
-        </button>
-        <button class="alternative_button" id="upload-button" type="button">
-          <i class="fas fa-file-upload" style="margin-right: 8px;"></i> Upload a Photo
-        </button>
-        <input type="file" id="upload-input" accept="image/*">
-      </div>
+    <div class="icon-box" style="margin-bottom: 24px;">
+      <span class="material-symbols-outlined icon">photo_camera</span>
     </div>
+
+    <h1>Scan or Upload Your ID</h1>
+    <p>Choose how you’d like to verify your age. You can scan your ID using your camera or upload a photo from your device.</p>
+
+    <div class="button-container">
+      <button class="blue_button" id="scan-button" type="button">
+        <span class="material-symbols-outlined">photo_camera</span>
+        Scan ID Now
+      </button>
+      
+      <button class="alternative_button" id="upload-button" type="button">
+        <span class="material-symbols-outlined">upload_file</span>
+        Upload a Photo
+      </button>
+      
+      <input type="file" id="upload-input" accept="image/*">
+    </div>
+
   </div>
 
   <script src="govid_script.js"></script>

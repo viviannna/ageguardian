@@ -1,214 +1,203 @@
-body {
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  color: #333;
-  background: linear-gradient(to bottom, #e3f2fd, #ffffff);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh; /* Use min-height instead of height */
+/* === Global Reset & Layout === */
+html, body {
   margin: 0;
-  padding: 20px; /* Add padding for mobile screens */
-  box-sizing: border-box; /* Include padding in the element's total width and height */
-}
-
-.container {
-  width: 90%; /* Adjust width for mobile */
-  max-width: 500px; /* Still have a max width for larger screens */
-  background: white;
-  padding: 20px; /* Adjust padding for mobile */
-  border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at top left, #f8f9fb, #eef1f6);
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   position: relative;
-  box-sizing: border-box; /* Include padding in the element's total width and height */
+  isolation: isolate;
 }
 
+/* === Stylized Background Blobs === */
+body::before {
+  content: "";
+  position: absolute;
+  top: -150px;
+  left: -150px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(ellipse at center, #c7d2fe 0%, transparent 70%);
+  opacity: 0.3;
+  z-index: -1;
+  filter: blur(40px);
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  bottom: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(ellipse at center, #dbeafe 0%, transparent 70%);
+  opacity: 0.3;
+  z-index: -1;
+  filter: blur(40px);
+}
+
+/* === Main Card Container === */
+.container {
+  background: white;
+  padding: 56px 48px;
+  border-radius: 28px;
+  max-width: 560px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+/* === Icon Styling === */
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e0e7ff;
+  border-radius: 20px;
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 28px;
+}
+
+.icon {
+  font-size: 44px;
+  color: #2563eb;
+}
+
+/* === Typography === */
 h1 {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 700;
-  color: #222;
+  margin-bottom: 16px;
+  color: #0f172a;
 }
 
 p {
-  font-size: 15px;
-  color: #444;
-  line-height: 1.6;
+  font-size: 16px;
+  color: #4b5563;
+  margin-bottom: 40px;
+  line-height: 1.65;
 }
 
+/* === Button Layout === */
 .button-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
-.button-container form {
+/* === Buttons === */
+.blue_button,
+.alternative_button {
   width: 100%;
-  max-width: 260px;
-}
-
-.button-container button {
-  width: 100%;
-}
-
-.blue_button, .alternative_button {
-  width: 100%;
-  max-width: 260px;
-  box-sizing: border-box; /* Include padding in the element's total width and height */
-}
-
-.blue_button {
-  background-color: #007bff;
-  color: white;
+  padding: 16px 24px;
   font-size: 16px;
-  font-weight: 600;
-  padding: 14px 24px;
+  border-radius: 14px;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s ease-in-out;
-  text-decoration: none;
+  box-sizing: border-box;
+  transition: background-color 0.25s ease;
+}
+
+/* Primary Button */
+.blue_button {
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
 }
 
 .blue_button:hover {
-  background-color: #0056b3;
+  background-color: #1f52d7; /* less contrast than before */
 }
 
+/* Secondary Button */
 .alternative_button {
-  background-color: #f4f4f4;
-  color: #666;
-  font-size: 14px;
-  font-weight: 500;
-  border: 1px solid #dcdcdc;
-  padding: 12px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  background-color: #f3f4f6;
+  color: #6b7280;
+  font-weight: 400;
+  border: 1px solid #d1d5db;
 }
 
 .alternative_button:hover {
-  background-color: #e0e0e0;
-  color: #444;
-  border-color: #bbb;
+  background-color: #e5e7eb;
 }
 
-.back-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #007bff;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  border-radius: 4px;
+/* === Mobile Responsive === */
+@media (max-width: 500px) {
+  .container {
+    padding: 36px 24px;
+    border-radius: 20px;
+  }
+
+  .icon-box {
+    width: 72px;
+    height: 72px;
+  }
+
+  .icon {
+    font-size: 36px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  p {
+    font-size: 14.5px;
+  }
+
+  .blue_button,
+  .alternative_button {
+    font-size: 15px;
+    padding: 14px 20px;
+    border-radius: 12px;
+  }
 }
 
-.back-button i {
-  font-size: 14px;
-}
-
-.back-button:hover {
-  background-color: #f0f0f0;
-  text-decoration: none;
-}
-
-.back-button:hover span {
-  text-decoration: underline;
-}
-
-/* Fix back button issues */
 .custom-back-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #007bff; /* Or your preferred blue color */
-  text-decoration: none;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  border-radius: 4px;
-  border: none;
-  background-color: transparent; /* No background */
-  cursor: pointer; /* Ensures it looks clickable */
-}
-
-.custom-back-button i {
   font-size: 14px;
-  /* remove underline */
-  text-decoration: none !important;
+  color: #6b7280;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 24px;
+  padding: 0;
+  transition: color 0.2s ease;
 }
 
 .custom-back-button:hover {
-  text-decoration: none; /* Underline on hover */
+  color: #374151;
 }
 
-.custom-back-button:hover span {
-  text-decoration: underline; /* underline only the "Back" text */
+.custom-back-button .material-symbols-outlined {
+  font-size: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
 }
 
-.privacy-text {
-  font-size: 12px;
-  color: #888;
-  margin-top: 10px;
-}
 
-.upload-container {
-  margin-top: 15px;
-  display: none;
-  color: #888;
-  font-size: 14px;
-}
-
-.upload-container span {
-  margin-right: 10px;
-}
-
-.remove-upload {
-  color: #888;
-  cursor: pointer;
-  font-weight: bold;
-  margin-left: 5px;
-}
-
-.remove-upload:hover {
-  color: #333;
-}
-
-.assurance-text {
-  font-size: 0.8rem;
-  color: #888;
-  margin-top: 20px;
-  margin-bottom: 24px;
-  line-height: 1.4;
-  display: flex;
-  align-items: flex-start;
+/* === Icon + Button Alignment Fix === */
+.button-container .material-symbols-outlined {
+  font-size: 20px;
+  margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  gap: 8px;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
+  vertical-align: middle;
+  position: relative;
+  top: 1px; /* slight nudge for visual alignment */
 }
 
-.assurance-text i {
-  margin-top: 2px;
-  color: #888;
-}
 
-.input-field {
-  padding: 14px 16px;
-  width: 100%;
-  max-width: 260px;
-  box-sizing: border-box;
-  margin-bottom: 0; /* removed the bottom margin to reduce gap */
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 15px;
-}
+
