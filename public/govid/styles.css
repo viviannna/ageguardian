@@ -268,3 +268,43 @@ p {
   pointer-events: none;
   z-index: 2;
 }
+
+
+
+.input-field {
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* .icon-box {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background-color: #e8f0fe;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px;
+} */
+
+.icon-box span {
+  font-size: 32px;
+  color: #1a73e8;
+}

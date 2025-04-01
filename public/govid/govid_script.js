@@ -187,7 +187,31 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Fallback check
-  if (!photoButtonIntro && !alternativeButtonIntro && !scanButtonPhoto && !uploadButtonPhoto && !uploadInputPhoto && !backToIntro && !alternativeSubmit && !captureButton) {
-    console.log("ℹ️ No active listeners on this page.");
+  // if (!photoButtonIntro && !alternativeButtonIntro && !scanButtonPhoto && !uploadButtonPhoto && !uploadInputPhoto && !backToIntro && !alternativeSubmit && !captureButton) {
+  //   console.log("ℹ️ No active listeners on this page.");
+  // }
+
+  // loading.html — log and redirect after delay
+  if (page === "loading") {
+    if (participantId && condition) {
+      const participantRef = db.collection("participants").doc(participantId);
+      const loadingLog = {
+        page: page,
+        choice: "loading_arrived",
+        timestamp: firebase.firestore.Timestamp.now()
+      };
+
+      participantRef.update({
+        choices: firebase.firestore.FieldValue.arrayUnion(loadingLog)
+      }).then(() => {
+        console.log("✅ Logged loading_arrived to Firestore");
+        setTimeout(() => {
+          window.location.href = `confirmation.html?participantId=${participantId}&condition=${condition}`;
+        }, 3000);
+      }).catch((err) => {
+        console.error("❌ Logging error on loading.html:", err);
+        window.location.href = `confirmation.html?participantId=${participantId}&condition=${condition}`;
+      });
+    }
   }
 });

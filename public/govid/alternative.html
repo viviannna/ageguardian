@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Prolific ID Submission</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <title>Age Verification</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="styles.css"/>
 
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-
 </head>
 <body>
   <div class="container">
@@ -20,37 +18,29 @@
       <span class="material-symbols-outlined">arrow_back</span>
       Back
     </button>
+    
+    <div class="icon-box">
+      <span class="material-symbols-outlined">badge</span>
+    </div>
 
-    <div style="text-align: center; padding: 30px;">
-      <i class="fas fa-user-circle" style="font-size: 80px; color: #007bff; margin-bottom: 20px;"></i>
-      <h1>Enter Your Prolific ID</h1>
-      <p>Thank you for choosing the alternative option. Please enter your Prolific ID below. You will be granted access to the site in 24 hours.</p>
+    <h1>Enter Your Prolific ID</h1>
+    <p>Thank you for choosing the alternative option. Please enter your Prolific ID below. You will be granted access to the site in 24 hours.</p>
 
-      <div class="button-container">
-        <input 
+    <div class="button-container">
+
+      <input 
           type="text" 
           id="prolific-id" 
           placeholder="Enter Prolific ID" 
           class="input-field" 
         />
 
-        <button class="blue_button" id="alternative-submit" type="button">
-          Submit
-        </button>
-      </div>
+      <form id="photoForm">
+        <button class="blue_button" type="button">Submit</button>
+      </form>
+      
     </div>
   </div>
-
-  <script>
-    function handleSubmit() {
-      const id = document.getElementById('prolific-id').value.trim();
-      if (id === '') {
-        alert('Please enter your Prolific ID before submitting.');
-      } else {
-        alert('Thank you! You’ll be granted access in 24 hours.');
-      }
-    }
-  </script>
 
   <script src="govid_script.js"></script>
 </body>
