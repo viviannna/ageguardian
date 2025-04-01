@@ -5,30 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Verification Successful</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
   <link rel="stylesheet" href="../styles.css">
-  <style>
-
-    .checkmark {
-      font-size: 80px;
-      color: #007bff;
-      margin-bottom: 20px;
-    }
-
-
-  </style>
+  <script src="govid_script.js"></script>
 </head>
 <body>
-
   <div class="container">
-    <div style="text-align: center; padding: 30px; max-width: 500px; margin: 0 auto;">
-        <i class="fas fa-check-circle checkmark"></i> 
-        <h1>Verification Successful</h1>
-        <p style="margin-bottom:20px;">Your age has been successfully verified. </p>
+    
+    <div class="icon-box">
+      <span class="material-symbols-outlined icon">verified</span>
+    </div>
 
-        <div class="button-container">
-            <a href="debrief.html"><button class="blue_button">Click Here to Return</button></a>
-        </div>
-    </div>  
+    <h1>Verification Successful</h1>
+    <p>Your age has been successfully verified.</p>
+
+    <button class="blue_button" id="govid-debrief" type="button">
+      Click Here to Return
+    </button>
+
+    </div>
+  </div>
+  <script src="../govid_script.js"></script>
 </body>
 </html>
